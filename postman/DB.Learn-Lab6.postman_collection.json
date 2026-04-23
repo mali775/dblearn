@@ -1,0 +1,102 @@
+{
+  "info": {
+    "name": "DB.Learn Lab 6",
+    "_postman_id": "3d0b9026-4474-4f31-903c-aefc1da30ca4",
+    "description": "Lab 6 REST API: auth, CRUD, search and stats.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001"
+    },
+    {
+      "key": "adminEmail",
+      "value": "admin@dblearn.kz"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/lab6/health"
+      }
+    },
+    {
+      "name": "Courses List",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/lab6/courses?page=1&pageSize=5"
+      }
+    },
+    {
+      "name": "Create Course",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Postman арқылы қосылған курс\",\n  \"description\": \"Lab 6 API тесті үшін қосылатын курс сипаттамасы.\",\n  \"difficulty\": \"Орташа\",\n  \"price\": 21000,\n  \"lessons\": 14,\n  \"categoryId\": 1,\n  \"teacherId\": 1\n}"
+        },
+        "url": "{{baseUrl}}/api/lab6/courses"
+      }
+    },
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"Postman User\",\n  \"phone\": \"87001234567\",\n  \"email\": \"postman.user@example.com\",\n  \"password\": \"Secret123\"\n}"
+        },
+        "url": "{{baseUrl}}/api/auth/register"
+      }
+    },
+    {
+      "name": "Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@dblearn.kz\",\n  \"password\": \"Admin123!\"\n}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      }
+    },
+    {
+      "name": "List Users As Admin",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-User-Role",
+            "value": "admin"
+          },
+          {
+            "key": "X-User-Email",
+            "value": "{{adminEmail}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/users"
+      }
+    }
+  ]
+}
